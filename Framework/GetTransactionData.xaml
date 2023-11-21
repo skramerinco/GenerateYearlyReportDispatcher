@@ -1,0 +1,253 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GetTransactionData" this:GetTransactionData.in_TransactionNumber="3" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Sequential counter of transaction items." Name="in_TransactionNumber" Type="InArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="out_TransactionItem" Type="OutArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="Allow the optional addition of information about the transaction item." Name="out_TransactionField1" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Allow the optional addition of information about the transaction item." Name="out_TransactionField2" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Transaction ID used for information and logging purposes. Ideally, the ID should be unique for each transaction. " Name="out_TransactionID" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="This variable can be used in case transactions are stored in a DataTable (for example, after being retrieved from a spreadsheet)." Name="io_dt_TransactionData" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1192.8,2221.6</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.Activities</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Get a transaction item from a specified source (e.g., Orchestrator queues, spreadsheets, databases, mailboxes or web APIs). &#xA;&#xA;If there are no transaction items remaining, out_TransactionItem is set to Nothing, which leads to the End Process state. &#xA;&#xA;For cases in which there is only a single transaction (i.e., a linear process), use an If activity to check whether the argument in_TransactionNumber has the value 1 (meaning it is the first and only transaction) and assign the transaction item to out_TransactionItem. For any other value of in_TransactionNumber, out_TransactionItem should be set to Nothing.&#xA;&#xA;If there are multiple transactions, use the argument in_TransactionNumber as an index to retrieve the correct transaction to be processed. If there are no more transactions left, it is necessary to set out_TransactionItem to Nothing, thus ending the process." DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="1203.2,2156.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Get Transaction Item" sap:VirtualizedContainerService.HintSize="1140.8,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Get the transaction item&quot;]" />
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Edge: ACME System 1 - Work Items" sap:VirtualizedContainerService.HintSize="1140.8,976.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="81845769-945d-49fa-948c-d51d5334f17d" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1107.2,760" sap2010:WorkflowViewState.IdRef="Sequence_12">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NCheckState sap2010:Annotation.AnnotationText="Ensure current page number is available. If it is pass the page number back. Otherwise pass back a zero indicating no more pages to process. " DisplayName="Check App State - current page number" sap:VirtualizedContainerService.HintSize="1044.8,644.8" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V3">
+              <uix:NCheckState.IfExists>
+                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="496,395.2" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click on appropriate page number" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="81845769-945d-49fa-948c-d51d5334f17d" Version="V3">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="https://acme-test.uipath.com/work-items" DesignTimeRectangle="1211, 828, 28, 28" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'2'" FullSelectorArgument="&lt;webctrl class='page-numbers' tag='A' /&gt;" FuzzySelectorArgument="[string.Format(&quot;&lt;webctrl class='page-numbers' tag='A' type='' aaname='{0}' check:innerText='{0}' /&gt;&quot;, in_TransactionNumber)]" Guid="d0b1c330-754f-4d61-ab38-1a87024f56ca" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAIVSURBVFhH7Va/S8NAGPWvDVIkiJsEKeJgkSIZsggOOijoUDGiDg75B0SKdHDJ0KGUlg6lhW7lmRe59JJ+SS5pxcUHj5C778e7u+++ZAd/jH8BxgKWyyUWiwWm0ykmkwnG4zFGo1H85DvHOU+7KigVwICz2SxOZkramwopFMAVqZVWJf3oX4ZcAfP5XAxclYxTBFHAtpIrFolYE8Btk4JsyrzjSAlg4ZSf+QC9JxfOfgOWZcW0HRf+50CwXZFxpcJMCTCp9u6V85P0yMPNkw//1oNjR0J2HVx/yD6KjJ9FIoDqJKcU+z5auxYaZy8I9fGwg5No3Dr10dfHBWZ3IRFgdPbBBewoUes5OxeicxIJOLxGNzW+zmwtJALYySQHIw4DuHuRgOY9vqR5jcyjIxHAdio5mFDVReuxL87rZB4diYC6Ha/30ILNomxn6iKHzKMjESAZF3OAd3UjTjvoDSUbmTrqCRiGeDm34+QHXmC0cp06qh/BsIv7Yya30bzryjYFzD0CsyKMVt7+Sd5+DYX5cuYWodE1DLy44Kz9JtquCzfLy7f619CkEQXeqv+L3KQRGbXiLTC3FRNVf72qsvBjRFBd3YZURsbNrp5ICSCMPko1mD17hTUBxJ/+kilsS0RRciJXAMFtq1sT9Mvbdh2FAggWTtXbQXup4CSUClBgQK6InYztVO0Mn3znOOdNEysYC/gdAN8GZA7PBuHc+QAAAABJRU5ErkJggg==" InformativeScreenshot="3168816d4ec303b31c8ec8937cb81da3.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='ACME System 1 - Work Items' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                            <uix:Target DesignTimeRectangle="310, 924, 1250, 25" ElementType="Text" FriendlyName="'Copyright ©'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;footer&amp;gt;div&amp;gt;div&amp;gt;p' tag='P' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' tag='P' class='' aaname='Copyright © 2023 ACME Systems' check:innerText='Copyright © 2023 ACME Systems' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                  <Assign DisplayName="Assign current page number to Transaction Item" sap:VirtualizedContainerService.HintSize="433.6,82.4" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[out_TransactionItem]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[in_TransactionNumber]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </uix:NCheckState.IfExists>
+              <uix:NCheckState.IfNotExists>
+                <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="496,197.6" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Assign 0 to Transaction Item" sap:VirtualizedContainerService.HintSize="433.6,82.4" sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[out_TransactionItem]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </uix:NCheckState.IfNotExists>
+              <uix:NCheckState.Target>
+                <uix:TargetAnchorable BrowserURL="https://acme-test.uipath.com/work-items" DesignTimeRectangle="1211, 1062, 28, 28" DesignTimeScaleFactor="1.25" ElementType="Text" FriendlyName="'1'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl aaname='{0}' tag='A' /&gt;&quot;, in_TransactionNumber)]" FuzzySelectorArgument="[string.Format(&quot;&lt;webctrl aaname='{0}' tag='A' type='' class='page-numbers current' check:text='{0}' /&gt;&quot;, in_TransactionNumber)]" Guid="384f29cc-b30a-41fb-883f-5ed326203870" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAFzSURBVFhH7ZbZboMwEEX7/38KoQpbCRUhUw6RLRZvQ1LRh17pKgHs8bE9HviQk/UPkAwwjqN0XSdlWUpRFJLnuWRZNv9yzX2e006jKAAB67qeB0s17VNBggDMyMxUa/rRPyYvQNM0zsBaEyckJ8C7BjcOQewAWDZXkFft244VAImj2vNLLf2Ua2NfuZ8vTFxXYq4AVNle1HK7P+Z+KQCY+FtZAOhcnfb+lGvby/Ace1YqAN6uggVI3vuql2eIh3y3nQzTPw3ANhcsAJXM1WHn6ibDvZf2epmuv9QAjLOUBaCcujqErQdgnKUswLGKpwdgnKUsgKtx3HoAvNTfATh9C05PwuRjuLIewHsMj72E9ADeQpReil+ztxQj7aeX1sGXEYLu2GmIm7jb2aMVADqWC3Fv995oB4BO/SQzehdEaHDkBUAs29GcoJ9v2ZcKAiASR3s6aO9KOJeiAEYEZEZUMsqpWRl+ueY+z1MHNkoG+B2J/ABTCV3TAC+5LgAAAABJRU5ErkJggg==" InformativeScreenshot="3ae93b6f22752ea260c5a53ad2734736.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='ACME System 1 - Work Items' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="310, 1158, 1250, 25" ElementType="Text" FriendlyName="'Copyright ©'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;footer&amp;gt;div&amp;gt;div&amp;gt;p' tag='P' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' tag='P' class='' aaname='Copyright © 2023 ACME Systems' check:innerText='Copyright © 2023 ACME Systems' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NCheckState.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NCheckState>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-9, -9, 1938, 1038" BrowserType="Edge" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAReSURBVFhHvZdtbFNlFMcf3SxUfI0miLAEWdShCV+EGD9oUJBJAobwQb8IGklkKEQkcy8MZK90tGsnZbxsvkDmxsYkS8QFPhDYLIy+sbv2rhW3dYPFbGyVbYwJJMu2wzm3Prd317ZCc+uHf9vnPC/n13PPc57nMrZX6EPdQo39zyKf1wgAZJWQ2sJtzYVrkw+lDT9G5UbBZWB5TmC7XIlRHgnXJ4hSyecwAYwxAzawM/1EoKFSvLEh97eBjOw4xedmNg9k7LSFRO2sloEMg2Po0x3n+4tYMUaiUIr0SAiAiL5xwfrGqyvSt69hiZZuXzv6cwP+cQVAoRveqQtsizRBS33vHV6cTAD5agA0rG7o+SLSpHg0ODG9aGlFR+vy+kCl0l4p3HgpKkC6RgAA8GxSqQfY5zZgm22wq3XwFO+zOIeiA6z5OQyQctBXpTd6BdwZwrsNPVZuV2vJD3/YWOFl9xNmr5hULGwiW8v1OxvZpmZg5SKw7a2Y8e3Ax5c5g9EB1p4MA+hNnjssH7dlth2WHusMcrta8yt8wHLswIpwbEHbUW5P/e4KsK0XJDX2jBVw+30DPGkR7awIt8pOJ7xR03WO29VadNg/Ke1tLDJPfyvuUfbtbu5fn+MIvqK0HYmVAzMAzKJTAdCsXEQpBJimMQQwx+TNjzRm6PbUQ/x3lWc4cQC60nYZYOEhP+jxsTxqbAfMp3JurxZHNAY44p/iAHpFBB63eIF9jbmBJVhn9Bi5vdanPYAcASUA/mtgu7H24+H2nLVDttdoDZAaBWAB7Q4CwLo/d38cAE9Z7hsg4iOIC+B9BcDsfR6XdGrhFltW3XWe29VKq/JPSAAGHFsiyPs9LgBlJcQk8mGFA5ZlhxX1gTPcrlbKobCjOWavidvjAnjreEAG+Ph03yn21SVgmZfg9druAW5XK9mI2Y5HOct2gFUIbuH25w/EAfBmTRjgqH9ks1RK6VDBx9B5a+IF3sc1DbCE5TqoBEvb7drfE/N431xrx4MDrKwPA5D0Zeg8FxehwXvckHfh+icmVzCt7vfRxTkt/VmMzopinLv1IrxW03VTOTdaBKpjAbynOo6b/hzfwj46hxmO/ZQPGGZdGYac2plYZOgOSU4+s8HoFKxSzk2hHKBHg3VgntUnnxExI6AGIH3Y1NfGdmAufInHKk2ik48umBgRsusK3LDhbL9c6biYAZ1suyglMUbpILfX+R8QgNTUO77sg8beX58xeuAxrO3JeL7Pt4jjG3+5+lPf3UldpDlvH+++mXqgY/LlSj8srw1kcfsxMcZhFA1ASx0WYgDglSzhl9IfPcNpUQHwUro20iStNQsf47+v5ZjN6072lpy4Mrqw3BV81eSYKSPKjCq1D0ptc4Qx/6UK4a8XjY6hdcmUoJi86FsCCL2aIUQSdszGRHsYvylMWusRFNuLotoReh2UXs1CDXpXo9cl2l5ElwjxtblPEn50o0ZQQUmGf74ToZlro0+h8x4tMHhuvyezngAAAABJRU5ErkJggg==" InformativeScreenshot="a3be9c420bec92ea44338e695e0717f6.jpg" Selector="&lt;html app='msedge.exe' title='ACME System 1 - Work Items' /&gt;" Title="ACME System 1 - Work Items" Url="[in_Config(&quot;System1_URL&quot;).ToString + &quot;*&quot;]" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <If sap2010:Annotation.AnnotationText="This optional step can be used to include more information about a transaction item and it is used mainly for logging and visualization purposes.&#xA;For example, if transaction items are invoices, then out_TransactionID can be the invoice number, out_TransactionField1 can be the invoice date and out_TransactionField2 can be the invoice amount." Condition="[out_TransactionItem &gt; 0]" DisplayName="If a new transaction item is retrieved, get additional information about it" sap:VirtualizedContainerService.HintSize="1140.8,689.6" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence sap2010:Annotation.AnnotationText="Write data to the added log fields that identify the transaction." DisplayName="Add transaction information to log fields" sap:VirtualizedContainerService.HintSize="476.8,414.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign out_TransactionID" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[out_TransactionID]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[now.ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Assign out_TransactionField1" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[out_TransactionField1]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[out_TransactionItem.ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Assign out_TransactionField2" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_7">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[out_TransactionField2]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[string.Empty]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
